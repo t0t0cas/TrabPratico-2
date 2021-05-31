@@ -1,0 +1,103 @@
+﻿@model IEnumerable<TrabPrático.Models.Jogos>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Imagem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoriaIdade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nota)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataLancamento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Media)
+            </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                <img src="~/fotosjogos/@Html.DisplayFor(modelItem => item.Imagem)"
+                     width="150"
+                     alt="Fotografia do @Html.DisplayFor(modelItem => item.Nome)"
+                     title="@Html.DisplayFor(modelItem => item.Nome)" />
+            </td>
+            <td style="text-align: center">
+                @Html.DisplayFor(modelItem => item.CategoriaIdade)
+            </td>
+            <td style="text-align: center">
+                @if (item.Nota < 45)
+                {
+                    <div style=" background-color: #ff0000">
+                        @Html.DisplayFor(modelItem => item.Nota)
+                    </div>
+                }
+                else if (item.Nota >= 45 && item.Nota < 75)
+                {
+                    <div style="background-color: yellow">
+                        @Html.DisplayFor(modelItem => item.Nota)
+                    </div>
+                }
+                else if (item.Nota >= 75 && item.Nota < 90)
+                {
+                    <div style="background-color: greenyellow">
+                        @Html.DisplayFor(modelItem => item.Nota)
+                    </div>
+                }
+                else if (item.Nota >= 90)
+                {
+                    <div style=" background-color: #00cc00">
+                        @Html.DisplayFor(modelItem => item.Nota)
+                    </div>
+                }
+            </td>
+            <td style="text-align: center">
+                @Html.DisplayFor(modelItem => item.DataLancamento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Media)
+            </td>*@
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdJogo">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdJogo">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdJogo">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
